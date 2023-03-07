@@ -19,16 +19,24 @@ class Api::V1::ProductsController < ApplicationController
     if @product.save
       render json: @product, status: 200
     else
-      render json: { error: "Product not created." }, status: :unprocessable_entity 
+      render json: { error: "Product not created.", status: "failed" }, status: :unprocessable_entity
     end
   end
 
   def update
-    
+    if @product.update(prod_params)
+      render json: @product, status: 200
+    else
+      render json: { error: "Product not updated.", status: "failed" }, status: :unprocessable_entity
+    end
   end
 
   def destroy
-  
+    if @product.destroy
+      render json: { data: "Product deleted successfully", status: 'success'}, status: :no_content 
+    else
+      render json: {data: "Something went wrong", status: 'failed'}
+    end
   end
 
   private
