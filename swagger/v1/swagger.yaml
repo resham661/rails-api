@@ -1,0 +1,160 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/products":
+    post:
+      summary: Creates a product
+      tags:
+      - Products
+      parameters: []
+      responses:
+        '201':
+          description: product created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                brand:
+                  type: string
+              required:
+              - name
+              - price
+              - brand
+    get:
+      summary: List of Products
+      tags:
+      - Products
+      responses:
+        '200':
+          description: Successful
+  "/api/v1/products/{id}":
+    get:
+      summary: Retrieves a Product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: product found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  price:
+                    type: number
+                  brand:
+                    type: string
+                required:
+                - id
+                - name
+                - price
+                - brand
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  price:
+                    type: number
+                  brand:
+                    type: string
+                required:
+                - id
+                - name
+                - price
+                - brand
+        '404':
+          description: product not found
+        '406':
+          description: unsupported accept header
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: update product
+      tags:
+      - Products
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                brand:
+                  type: string
+              required:
+              - name
+              - price
+              - brand
+    put:
+      summary: update product
+      tags:
+      - Products
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                brand:
+                  type: string
+              required:
+              - name
+              - price
+              - brand
+    delete:
+      summary: delete Product
+      tags:
+      - Products
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

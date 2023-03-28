@@ -46,3 +46,7 @@ group :development do
   # gem "spring"
 end
 
+gem "rswag"
+
+gem "rspec-rails"
+
